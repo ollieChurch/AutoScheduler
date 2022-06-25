@@ -1,0 +1,43 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Web
+@using AutoScheduler.Models
+@using AutoScheduler.Services
+@using Microsoft.AspNetCore.Mvc
+@inject JsonFileBacklogItemService BacklogService
+
+<div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Item To The Backlog</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/api/backlog/addItem" method="post">
+                <div class="modal-body">
+                    <label for="name" class="row">Task:</label>
+                    <input type="text" class="row mb-4" name="name" placeholder="Task..." />
+                    <label class="row" for="priority">Priority Of Task:</label>
+                    <select class="row mb-4" name="priority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                    <label class="row" for="length">Length Of Task:</label>
+                    <select class="row mb-4" name="length">
+                        <option value="short">Short</option>
+                        <option value="medium">Medium</option>
+                        <option value="long">Long</option>
+                        <option value="veryLong">Very Long</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@code {
+}

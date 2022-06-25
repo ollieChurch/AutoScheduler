@@ -1,0 +1,15 @@
+﻿@page
+@using AutoScheduler.Components 
+@model BacklogModel
+@{
+    ViewData["Title"] = "Backlog page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Backlog</h1>
+    <p>What needs to be done.</p>
+</div>
+
+@(await Html.RenderComponentAsync<BacklogList>(RenderMode.ServerPrerendered))
+
+<script src="_framework/blazor.server.js"></script>
