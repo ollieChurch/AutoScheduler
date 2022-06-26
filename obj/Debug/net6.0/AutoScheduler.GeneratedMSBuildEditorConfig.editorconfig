@@ -23,6 +23,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9CYWNrbG9nTGlzdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/oliverchurch/Documents/Coding/C\#/AutoScheduler/Components/StatsDashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9TdGF0c0Rhc2hib2FyZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/oliverchurch/Documents/Coding/C\#/AutoScheduler/Pages/Backlog.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQmFja2xvZy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

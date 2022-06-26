@@ -9,7 +9,7 @@ namespace AutoScheduler.Models
         public string? Length { get; set; }
         public string? Priority { get; set; }
         public bool? Completed { get; set; }
-        public DateTime? CompletedDateTime { get; set; }
+        public string? CompletedDateTime { get; set; }
 
         public override string ToString() => JsonSerializer.Serialize<BacklogItem>(this);
     }

@@ -43,7 +43,7 @@ namespace AutoScheduler.Services
             if (query.Completed == false || query.Completed == null)
             {
                 query.Completed = true;
-                query.CompletedDateTime = DateTime.UtcNow;
+                query.CompletedDateTime = DateTime.UtcNow.ToString();
             }
             else
             {
@@ -128,5 +128,7 @@ namespace AutoScheduler.Services
                 Console.WriteLine("failed to remove from list");
             }
         }
+
+        
     }
 }

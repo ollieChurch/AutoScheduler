@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "jAqmGTgzUQQaVfwFDU9E0yc3On+Wyo5qqjwDRRutJGU=",
+  "Hash": "1svlOryM9n9QuW8aQx1FIDr/o102ZypSzhqAvk22qvE=",
   "Source": "AutoScheduler",
   "BasePath": "_content/AutoScheduler",
   "Mode": "Default",
@@ -83,6 +83,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/data/backlog.json"
+    },
+    {
+      "Identity": "/Users/oliverchurch/Documents/Coding/C#/AutoScheduler/wwwroot/data/schedule.json",
+      "SourceId": "AutoScheduler",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/oliverchurch/Documents/Coding/C#/AutoScheduler/wwwroot/",
+      "BasePath": "_content/AutoScheduler",
+      "RelativePath": "data/schedule.json",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/data/schedule.json"
     },
     {
       "Identity": "/Users/oliverchurch/Documents/Coding/C#/AutoScheduler/wwwroot/favicon.ico",

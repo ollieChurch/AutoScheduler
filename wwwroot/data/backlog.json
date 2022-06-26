@@ -3,8 +3,16 @@
     "Id": "1",
     "Name": "Add remaining tasks to create Auto Scheduler to Auto Scheduler backlog",
     "Length": "short",
-    "Priority": "medium",
+    "Priority": "mid",
     "Completed": false,
+    "CompletedDateTime": null
+  },
+  {
+    "Id": "2",
+    "Name": "Decide on scope of this sprint",
+    "Length": "medium",
+    "Priority": "high",
+    "Completed": null,
     "CompletedDateTime": null
   }
 ]
