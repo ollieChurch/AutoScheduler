@@ -7,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddTransient<JsonFileBacklogItemService>();
+builder.Services.AddTransient<UserStatsService>();
+builder.Services.AddTransient<JsonFileSchedulerService>();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddControllers();
 
