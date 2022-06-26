@@ -24,7 +24,7 @@ namespace AutoScheduler.Services
 
         public IEnumerable<BacklogItem> GetBacklog()
         {
-            using(var jsonFileReader = File.OpenText(JsonFileName))
+            using (var jsonFileReader = File.OpenText(JsonFileName))
             {
                 var result = JsonSerializer.Deserialize<BacklogItem[]>(jsonFileReader.ReadToEnd(),
                     new JsonSerializerOptions
@@ -40,16 +40,25 @@ namespace AutoScheduler.Services
             var backlog = GetBacklog();
             var query = backlog.First(x => x.Id == backlogId);
 
-            query.Completed = query.Completed == null || query.Completed == false ? true : false;
+            if (query.Completed == false || query.Completed == null)
+            {
+                query.Completed = true;
+                query.CompletedDateTime = DateTime.UtcNow;
+            }
+            else
+            {
+                query.Completed = false;
+                query.CompletedDateTime = null;
+            }
 
-            using(var outputStream = File.Open(JsonFileName, FileMode.Truncate))
+            using (var outputStream = File.Open(JsonFileName, FileMode.Truncate))
             {
                 JsonSerializer.Serialize<IEnumerable<BacklogItem>>(
                     new Utf8JsonWriter(outputStream, new JsonWriterOptions
                     {
                         SkipValidation = true,
                         Indented = true
-                    }), 
+                    }),
                     backlog
                 );
             }
@@ -58,50 +67,65 @@ namespace AutoScheduler.Services
         public void AddItemToBacklog(string name, string length, string priority)
         {
             var backlog = GetBacklog().ToList();
-            var prevId = backlog.Last().Id;
-            var newId = prevId is null ? "1" : (int.Parse(prevId) + 1).ToString();
-            var newItem = new BacklogItem();
-            newItem.Id = newId;
-            newItem.Name = name;
-            newItem.Length = length;
-            newItem.Priority = priority;
-            backlog.Add(newItem);
+            var prevId = backlog.Count == 0 || backlog == null ? "0" : backlog.Last().Id;
 
-            Console.WriteLine(newItem);
-
-            using(var outputStream = File.Open(JsonFileName, FileMode.Truncate))
+            try
             {
-                JsonSerializer.Serialize<IEnumerable<BacklogItem>>(
-                    new Utf8JsonWriter(outputStream, new JsonWriterOptions
-                    {
-                        SkipValidation = true,
-                        Indented = true
-                    }), 
-                    backlog
-                );
+                var newId = (int.Parse(prevId) + 1).ToString();
+                var newItem = new BacklogItem();
+                newItem.Id = newId;
+                newItem.Name = name;
+                newItem.Length = length;
+                newItem.Priority = priority;
+                backlog.Add(newItem);
+
+                Console.WriteLine(newItem);
+
+                using (var outputStream = File.Open(JsonFileName, FileMode.Truncate))
+                {
+                    JsonSerializer.Serialize<IEnumerable<BacklogItem>>(
+                        new Utf8JsonWriter(outputStream, new JsonWriterOptions
+                        {
+                            SkipValidation = true,
+                            Indented = true
+                        }),
+                        backlog
+                    );
+                }
             }
-        } 
+            catch
+            {
+                Console.WriteLine("something went wrong! No item added.");
+            }
+
+
+
+        }
 
         public void RemoveItemFromBacklog(string backlogId)
         {
             var backlog = GetBacklog().ToList();
             var query = backlog.First(x => x.Id == backlogId);
-            var result = backlog.Remove(query);
-            if (!result)
+
+            try
+            {
+                backlog.Remove(query);
+
+                using (var outputStream = File.Open(JsonFileName, FileMode.Truncate))
+                {
+                    JsonSerializer.Serialize<IEnumerable<BacklogItem>>(
+                        new Utf8JsonWriter(outputStream, new JsonWriterOptions
+                        {
+                            SkipValidation = true,
+                            Indented = true
+                        }),
+                        backlog
+                    );
+                }
+            }
+            catch
             {
                 Console.WriteLine("failed to remove from list");
-            }
-
-            using(var outputStream = File.Open(JsonFileName, FileMode.Truncate))
-            {
-                JsonSerializer.Serialize<IEnumerable<BacklogItem>>(
-                    new Utf8JsonWriter(outputStream, new JsonWriterOptions
-                    {
-                        SkipValidation = true,
-                        Indented = true
-                    }), 
-                    backlog
-                );
             }
         }
     }

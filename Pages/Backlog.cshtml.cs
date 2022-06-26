@@ -8,19 +8,14 @@ namespace AutoScheduler.Pages;
 public class BacklogModel : PageModel
 {
     private readonly ILogger<BacklogModel> _logger;
-    public JsonFileBacklogItemService BacklogService;
-    public IEnumerable<BacklogItem> Backlog { get; private set;}
 
-    public BacklogModel(
-        ILogger<BacklogModel> logger,
-        JsonFileBacklogItemService backlogService)
+    public BacklogModel(ILogger<BacklogModel> logger)
     {
         _logger = logger;
-        BacklogService = backlogService;
     }
 
     public void OnGet()
     {
-        Backlog = BacklogService.GetBacklog();
+
     }
 }

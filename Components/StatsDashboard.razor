@@ -1,0 +1,88 @@
+﻿@using AutoScheduler.Services
+@inject UserStatsService UserStatsService
+
+<div class="mb-4">
+    <h3 class="display-6 text-center mb-2">Dashboard Stats</h3>
+    <div class="row gap-1">
+        <div class="col d-grid gap-2">
+            <div class="text-center card d-flex justify-content-center align-items-center">
+                <div class="text-center px-4">
+                    @UserStatsService.GetNumOfItemsInBacklog()
+                    @shouldBePlural("Task", @UserStatsService.GetNumOfItemsInBacklog()) in Backlog
+                </div>
+            </div>
+            <div class="text-center card d-flex justify-content-center align-items-center">
+                <div class="text-center px-4">
+                    @UserStatsService.GetNumOfRecentlyCompleted(daysToCheckForCompleted)
+                    @shouldBePlural("Task", @UserStatsService.GetNumOfRecentlyCompleted(daysToCheckForCompleted)) 
+                    Completed In The Last @daysToCheckForCompleted days
+                </div>
+            </div>
+        </div>
+        <div class="col row">
+            @foreach(var stat in @UserStatsService.GetStatsOfPriority())
+            {
+                <div class=@getPriorityClasses(stat.Name)>
+                    <div class="text-center px-4">
+                        @stat.Figure <br /> 
+                        @char.ToUpper(stat.Name[0])@stat.Name.Substring(1) <br />
+                        Priority
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col d-grid gap-2">
+            @foreach(var stat in @UserStatsService.GetStatsOfLength())
+            {
+                <div class="card">
+                    <div class="card-body">
+                        @stat.Figure 
+                        @char.ToUpper(stat.Name[0])@stat.Name.Substring(1) @shouldBePlural("Task", stat.Figure)
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    public int daysToCheckForCompleted = 14;
+    public string shouldBePlural(string word, double num)
+    {
+        return num == 1 ? word : word + "s";
+    }
+
+    public string getPriorityClasses(string level) {
+        return $"card col mx-1 d-flex justify-content-center align-items-center bg-{priorityColors("background", level)} text-{priorityColors("text", level)}";
+    }
+
+    public string priorityColors(string element, string level)
+    {
+        string background, textColor;
+
+        switch(level)
+        {
+            case "high":
+                background = "danger";
+                textColor = "white";
+            break;
+
+            case "mid":
+                background = "warning";
+                textColor = "black";
+            break;
+
+            case "low":
+                background = "info";
+                textColor = "black";
+            break;
+
+            default:
+                background = "white";
+                textColor = "black";
+            break;
+        }
+
+        return element == "background" ? background : textColor; 
+    }
+}

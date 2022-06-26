@@ -4,7 +4,53 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div>
+    <div class="text-center mb-4">
+        <h1 class="display-4">Auto Scheduler</h1>
+        <p>Let's get sh!t done</p>
+    </div>
+
+    <div class="mb-4">
+        <h3 class="display-6 text-center mb-2">Dashboard Stats</h3>
+        <div class="row">
+            <div class="col text-center card mx-2">
+                <div class="card-body">
+                    <p class="display-6">10</p>
+                    <p>Items in Backlog</p>
+                </div>
+
+            </div>
+            <div class="col card mx-2">
+                <div class="card-body">
+                <p>5 High Priority</p>
+                <p>3 Mid Priority</p>
+                <p>2 Low Priority</p>
+                </div>
+            </div>
+            <div class="col card mx-2">
+                <div class="card-body">
+                <p>2 Very Long Tasks</p>
+                <p>1 Long Task</p>
+                <p>3 Mid Length Tasks</p>
+                <p>5 Short Tasks</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <h3 class="display-6 mb-2">Scheduler</h3>
+        <div class="card">
+            <div class="card-body">
+                <p>Enter the start and finish time of your productive session below and let the Auto Scheduler work it's magic.</p>
+                <form>
+                    <label for="startTime">Start at: </label>
+                    <input type="time" name="startTime" class="me-4"/>
+                    <label for="endTime">End around: </label>
+                    <input type="time" name="endTime" class="me-4"/>
+                    <button type="submit">Schedule!</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

@@ -3,6 +3,10 @@
 @using AutoScheduler.Services
 @inject JsonFileBacklogItemService BacklogService
 
+@if (!BacklogService.GetBacklog().Any(x => x.Completed == false || x.Completed == null))
+{
+    <p class="text-center my-5">You're all done! Maybe take a walk?</p>
+}
 
 @foreach (var item in BacklogService.GetBacklog()) 
 {
@@ -41,6 +45,10 @@
 </div>
 
 <div class="collapse" id="collapseCompleted" style="">
+    @if (BacklogService.GetBacklog().Any(x => x.Completed == true) == false)
+    {
+        <p class="text-center my-5">Nothing completed... yet</p>
+    }
 
     @foreach (var item in BacklogService.GetBacklog()) 
     {
