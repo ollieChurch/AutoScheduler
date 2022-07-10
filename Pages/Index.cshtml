@@ -2,30 +2,14 @@
 @using Components
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Dashboard";
 }
 
-<div>
-    <div class="text-center mb-4">
-        <h1 class="display-4">Auto Scheduler</h1>
-        <p>Let's get sh!t done</p>
-    </div>
-
-    @(await Html.RenderComponentAsync<StatsDashboard>(RenderMode.ServerPrerendered))
-
-    <div class="text-center">
-        <h3 class="display-6 mb-2">Scheduler</h3>
-        <div class="card">
-            <div class="card-body">
-                <p>Enter the start and finish time of your productive session below and let the Auto Scheduler work it's magic.</p>
-                <form>
-                    <label for="startTime">Start at: </label>
-                    <input type="time" name="startTime" class="me-4"/>
-                    <label for="endTime">End around: </label>
-                    <input type="time" name="endTime" class="me-4"/>
-                    <button type="submit">Schedule!</button>
-                </form>
-            </div>
-        </div>
-    </div>
+<div class="text-center mb-4">
+    <h1 class="display-4">Auto Scheduler</h1>
+    <p>Let's get sh!t done</p>
 </div>
+
+@(await Html.RenderComponentAsync<StatsDashboard>(RenderMode.ServerPrerendered))
+@(await Html.RenderComponentAsync<CreateScheduleForm>(RenderMode.ServerPrerendered))
+

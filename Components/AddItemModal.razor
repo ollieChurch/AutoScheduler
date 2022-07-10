@@ -14,21 +14,27 @@
             </div>
             <form action="/api/backlog/addItem" method="post">
                 <div class="modal-body">
-                    <label for="name" class="row">Task:</label>
-                    <input type="text" class="row mb-4" name="name" placeholder="Task..." />
-                    <label class="row" for="priority">Priority Of Task:</label>
-                    <select class="row mb-4" name="priority">
-                        <option value="low">Low</option>
-                        <option value="mid">Mid</option>
-                        <option value="high">High</option>
-                    </select>
-                    <label class="row" for="length">Length Of Task:</label>
-                    <select class="row mb-4" name="length">
-                        <option value="short">Short</option>
-                        <option value="medium">Medium</option>
-                        <option value="long">Long</option>
-                        <option value="veryLong">Very Long</option>
-                    </select>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="task" placeholder="task name">
+                        <label for="task">Task</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select class="form-select" name="priority" aria-label="Choose task priority">
+                            <option value="low">Low</option>
+                            <option value="mid">Mid</option>
+                            <option value="high">High</option>
+                        </select>
+                        <label for="priority">Task Priority</label>
+                    </div>
+                    <div class="form-floating">
+                        <select class="form-select" name="length" aria-label="Choose task length">
+                            <option value="short">Short</option>
+                            <option value="medium">Medium</option>
+                            <option value="long">Long</option>
+                            <option value="very long">Very Long</option>
+                        </select>
+                        <label for="length">Task Length</label>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

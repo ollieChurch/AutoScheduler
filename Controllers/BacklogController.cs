@@ -35,9 +35,9 @@ namespace AutoScheduler.Controllers
 
         [HttpPost]
         [Route("addItem")]
-        public ActionResult AddItem([FromForm]  string name, [FromForm] string length, [FromForm] string priority)
+        public ActionResult AddItem([FromForm]  string task, [FromForm] string length, [FromForm] string priority)
         {
-            BacklogItemService.AddItemToBacklog(name, length, priority);
+            BacklogItemService.AddItemToBacklog(task, length, priority);
             return Redirect("/Backlog");
         }
 

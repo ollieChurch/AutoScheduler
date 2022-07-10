@@ -1,0 +1,19 @@
+﻿<div class="text-center">
+    <h3 class="display-6 mb-2">Scheduler</h3>
+    <div class="card">
+        <div class="card-body">
+            <p>Enter the start and finish time of your productive session below and let the Auto Scheduler work it's magic.</p>
+            <form action="/api/scheduler/createSchedule" method="post">
+                <label for="startTime">Start at: </label>
+                <input type="time" name="startTime" class="me-4"/>
+                <label for="endTime">End around: </label>
+                <input type="time" name="endTime" class="me-4"/>
+                <button type="submit" class="btn btn-primary">Schedule!</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@code {
+
+}

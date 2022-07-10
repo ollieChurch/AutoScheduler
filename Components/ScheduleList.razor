@@ -1,0 +1,107 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@using AutoScheduler.Models
+@using AutoScheduler.Services
+@using Microsoft.AspNetCore.Mvc.RazorPages
+@inject JsonFileBacklogItemService BacklogService 
+@inject JsonFileSchedulerService SchedulerService
+
+<h1>Your Schedule</h1>
+
+@foreach(var task in SchedulerService.GetSchedule())
+{
+    <div class="card mb-2">
+        <div class=@GetClasses(task.TaskId)>    
+            <h3 class="col-3">@task.StartTime</h3>
+            <p class="col-7">@GetTaskName(task.TaskId)</p>
+            <div class="col-2 d-flex justify-content-center">
+                @if(task.TaskId != null)
+                {
+                    <button class="btn btn-primary" @onclick="(e => ScheduleChangeStatus(task.TaskId))">
+                        @if(Convert.ToBoolean(BacklogService.GetMatchingBacklogItem(task.TaskId).Completed))
+                        {
+                            <i class="bi bi-arrow-counterclockwise"></i>
+                        } 
+                        else 
+                        {
+                            <i class="bi bi-check-circle"></i>
+                        }
+                    </button>
+                }
+
+                @if(task.TaskId == null)
+                {
+                    <button class="btn btn-danger" @onclick="(e => ReplaceSchedule())">
+                        New Schedule
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+@if(SchedulerService.GetSchedule().Count() > 0)
+{
+    <div class='card'>
+        <div class='card-body row'>
+            <h3 class='heading-3 col-10'>
+                @(SchedulerService.CheckIfScheduleComplete() ? 
+                    "Good Work, Mission Accomplished!" :
+                    $"Expected Finish Time: {SchedulerService.GetSchedule().Last().FinishTime}")
+            </h3>
+            <div class="col-2 d-flex justify-content-center">
+                <button class="btn btn-warning" @onclick="(e => DeleteSchedule())">End Session</button>
+            </div>
+        </div>
+    </div>
+}
+
+@if(SchedulerService.GetSchedule().Count() == 0)
+{
+    <p class="fst-italic">Please Refresh The Page</p>
+}
+
+
+@code {
+    void ScheduleChangeStatus(string id) 
+    {
+        BacklogService.ChangeCompletedStatus(id);
+    }
+
+    string GetTaskName(string id)
+    {
+        if (id == null)
+        {
+            return "This task was deleted from the backlog";
+        }
+
+        var taskName = BacklogService.GetMatchingBacklogItem(id).Name;
+        return taskName != null ? taskName : "task name not found";
+    }
+
+    void DeleteSchedule()
+    {
+        SchedulerService.DeleteSchedule();
+    }
+
+    void ReplaceSchedule()
+    {
+        var schedule = SchedulerService.GetSchedule().ToList();
+        var startTime = schedule.First().StartTime;
+        var finishTime = schedule.Last().FinishTime;
+        try
+        {
+            SchedulerService.CreateNewSchedule(startTime, finishTime);
+        }
+        catch
+        {
+            Console.WriteLine("A new schedule could not be created");
+        }
+    }
+
+    string GetClasses(string id)
+    {
+        var taskComplete = id == null ? false : Convert.ToBoolean(BacklogService.GetMatchingBacklogItem(id).Completed);
+        string classList = "card-body row";
+        return taskComplete ? $"{classList} bg-success text-white" : classList;
+    }
+}

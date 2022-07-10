@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AutoScheduler.Pages;
-
 public class BacklogModel : PageModel
 {
     private readonly ILogger<BacklogModel> _logger;

@@ -10,12 +10,11 @@ namespace AutoScheduler.Services
 {
     public class JsonFileBacklogItemService
     {
+        public IWebHostEnvironment WebHostEnvironment { get; }
         public JsonFileBacklogItemService(IWebHostEnvironment webHostEnvironment)
         {
             WebHostEnvironment = webHostEnvironment;
         }
-
-        public IWebHostEnvironment WebHostEnvironment { get; }
 
         private string JsonFileName
         {
@@ -32,6 +31,19 @@ namespace AutoScheduler.Services
                         PropertyNameCaseInsensitive = true
                     });
                 return result != null ? result : default!;
+            }
+        }
+
+        public BacklogItem GetMatchingBacklogItem(string id)
+        {
+            try
+            {
+                return GetBacklog().First(x => x.Id == id);
+            }
+            catch
+            {
+                Console.WriteLine("Unable to match item to backlog");
+                return default!;
             }
         }
 
@@ -83,7 +95,7 @@ namespace AutoScheduler.Services
 
                 using (var outputStream = File.Open(JsonFileName, FileMode.Truncate))
                 {
-                    JsonSerializer.Serialize<IEnumerable<BacklogItem>>(
+                    JsonSerializer.Serialize<List<BacklogItem>>(
                         new Utf8JsonWriter(outputStream, new JsonWriterOptions
                         {
                             SkipValidation = true,
@@ -97,9 +109,6 @@ namespace AutoScheduler.Services
             {
                 Console.WriteLine("something went wrong! No item added.");
             }
-
-
-
         }
 
         public void RemoveItemFromBacklog(string backlogId)
@@ -125,7 +134,7 @@ namespace AutoScheduler.Services
             }
             catch
             {
-                Console.WriteLine("failed to remove from list");
+                Console.WriteLine("failed to remove from backlog and or schedule");
             }
         }
 

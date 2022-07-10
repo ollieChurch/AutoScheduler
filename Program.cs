@@ -32,11 +32,4 @@ app.MapControllers();
 app.MapRazorPages();
 app.MapBlazorHub();
 
-// app.MapGet("/backlogItems", (context) => 
-// {
-//     var backlog = app.Services.GetService<JsonFileBacklogItemService>().GetBacklog();
-//     var json = JsonSerializer.Serialize<IEnumerable<BacklogItem>>(backlog);
-//     return context.Response.WriteAsync(json);
-// });
-
 app.Run();

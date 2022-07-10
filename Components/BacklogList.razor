@@ -2,6 +2,7 @@
 @using AutoScheduler.Models
 @using AutoScheduler.Services
 @inject JsonFileBacklogItemService BacklogService
+@inject JsonFileSchedulerService SchedulerService
 
 @if (!BacklogService.GetBacklog().Any(x => x.Completed == false || x.Completed == null))
 {
@@ -13,13 +14,29 @@
     if (item.Completed == null || item.Completed == false) 
     {
         <div class='card mb-3'>
-            <div class='card-body row align-items-center'>
-                <h4 class='col-sm-6 card-title'>@item.Name</h4>
-                <p class='col-sm-2 card-text'>Task Length: @item.Length</p>
-                <p class='col-sm-2 card-text'>Task Priority: @item.Priority</p>
-                <div class='col-sm-2'>
-                    <button class="btn btn-danger mx-2"  @onclick="(e => RemoveItem(item.Id))">X</button>
-                    <button class="btn btn-success mx-2"  @onclick="(e => ChangeStatus(item.Id))">V</button>
+            <div class='card-body row align-items-center justify-content-between'>
+                <h4 class='col-md-5 col-lg-8 card-title'>@item.Name</h4>
+                <div class='col-md-7 col-lg-4 row align-items-center'>
+                    <div class='col-3 text-center'>
+                        <i class="bi bi-hourglass-split" style="font-size: 2rem;"></i>
+                        <br />
+                        <small class="text-muted">@item.Length</small>
+                    </div>
+                    <div class='col-3 text-center'>
+                        <i class=@GetPrioritySymbol(item.Priority) style="font-size: 2rem;"></i>
+                        <br />
+                        <small class="text-muted">priority</small>
+                    </div>
+                    <div class="col-3 d-flex justify-content-center">
+                        <button class="btn btn-danger" @onclick="(e => RemoveItem(item.Id))">
+                            <i class="bi bi-trash" style="font-size: 1.5rem;"></i>
+                        </button>
+                    </div>
+                    <div class="col-3 d-flex justify-content-center">
+                        <button class="btn btn-success" @onclick="(e => ChangeStatus(item.Id))">
+                            <i class="bi bi-check-circle" style="font-size: 1.5rem;"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -55,11 +72,19 @@
         if (item.Completed == true) 
         {
             <div class='card mb-3'>
-                <div class='card-body row align-items-center'>
-                    <h4 class='col-sm-10 card-title'>@item.Name</h4>
-                    <div class='col-sm-2'>
-                        <button class="btn btn-danger mx-2" @onclick="(e => RemoveItem(item.Id))">X</button>
-                        <button class="btn btn-warning mx-2" @onclick="(e => ChangeStatus(item.Id))">N</button>
+                <div class='card-body row align-items-center justify-content-between'>
+                    <h4 class='col-md-5 col-lg-8 card-title'>@item.Name</h4>
+                    <div class='col-md-7 col-lg-4 row'>
+                        <div class='col-3 offset-6 d-flex justify-content-center'>
+                            <button class="btn btn-danger mx-2" @onclick="(e => RemoveItem(item.Id))">
+                                <i class="bi bi-trash" style="font-size: 1.5rem;"></i>
+                            </button>
+                        </div>
+                        <div class="col-3 d-flex justify-content-center">
+                            <button class="btn btn-warning mx-2" @onclick="(e => ChangeStatus(item.Id))">
+                                <i class="bi bi-arrow-counterclockwise" style="font-size: 1.5rem;"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -81,13 +106,29 @@
 
     void RemoveItem(string id) 
     {
-        Console.WriteLine($"{id} to be removed");
-        BacklogItem SelectedItem = BacklogService.GetBacklog().First(x => x.Id == id);
         BacklogService.RemoveItemFromBacklog(id);
-        Console.WriteLine($"{SelectedItem.Name} removed from backlog");
+        Console.WriteLine($"{id} removed from backlog");
+        SchedulerService.RemoveItemFromSchedule(id);
+        Console.WriteLine($"{id} removed from schedule");
     }
 
     void ToggleCollapse() {
         Collapsed = !Collapsed;
+    }
+
+    string GetPrioritySymbol(string priority)
+    {
+        string result = "bi bi-diamond";
+
+        if (priority == "high")
+        {
+            return $"{result}-fill text-danger";
+        }
+        else if (priority == "mid")
+        {
+            return $"{result}-half text-warning";
+        }
+
+        return $"{result} text-info";
     }
 }

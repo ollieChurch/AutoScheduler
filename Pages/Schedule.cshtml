@@ -1,0 +1,19 @@
+﻿@page
+@using AutoScheduler.Components
+@model ScheduleModel
+@{
+    ViewData["Title"] = "Schedule";
+}
+
+@if(Model.Schedule.Count() > 0)
+{
+    @(await Html.RenderComponentAsync<ScheduleList>(RenderMode.ServerPrerendered))
+}
+
+@if(Model.Schedule.Count() == 0)
+{
+    @(await Html.RenderComponentAsync<CreateScheduleForm>(RenderMode.ServerPrerendered))
+}
+
+
+<script src="_framework/blazor.server.js"></script>

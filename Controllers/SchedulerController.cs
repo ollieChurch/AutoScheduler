@@ -20,10 +20,18 @@ namespace AutoScheduler.Controllers
         public JsonFileSchedulerService SchedulerService { get; }
 
         [HttpGet]
-        [Route("createSchedule")]
-        public List<ScheduleEntry> CreateNewSchedule([FromQuery] string startTime, [FromQuery] string endTime)
+        [Route("getSchedule")]
+        public IEnumerable<ScheduleEntry> getSchedule()
         {
-            return SchedulerService.GetNewSchedule(startTime, endTime);
+            return SchedulerService.GetSchedule();
+        }
+
+        [HttpPost]
+        [Route("createSchedule")]
+        public ActionResult CreateNewSchedule([FromForm] string startTime, [FromForm] string endTime)
+        {
+            SchedulerService.CreateNewSchedule(startTime, endTime);
+            return Redirect("/schedule");
         }
 
     }
