@@ -39,22 +39,46 @@ namespace AutoScheduler.Services
             var minsRemaining = (TimeOnly.Parse(finish) - TimeOnly.Parse(start)).TotalMinutes;
             var scheduleTime = TimeOnly.Parse(start);
             var priorityLevels = new List<string> {"high", "mid", "low"};
+            var breakTimes = CalculateBreaks(minsRemaining, scheduleTime);
             
             foreach(var level in priorityLevels)
             {
                 foreach(var task in backlog.FindAll(x => x.Priority == level))
                 {
+                    var breakLengthInMins = 20;
+                    var includeBreaks = true;
+                    if (
+                        includeBreaks && 
+                        breakTimes.Count() > 0 &&
+                        scheduleTime >= breakTimes[0] && 
+                        breakLengthInMins <= minsRemaining
+                    ){
+                        var newScheduleTime = scheduleTime.AddMinutes(breakLengthInMins);
+                        
+                        newSchedule.Add(CreateNewScheduleEntry(
+                            scheduleTime,
+                            newScheduleTime,
+                            "break",
+                            null
+                        ));
+
+                        minsRemaining = minsRemaining - breakLengthInMins;
+                        scheduleTime = newScheduleTime;
+                        breakTimes.RemoveAt(0);
+                    }
+
                     var lengthInMins = GetTaskLengthInMins(task.Length);
                     if (lengthInMins <= minsRemaining)
                     {
                         var newScheduleTime = scheduleTime.AddMinutes(lengthInMins);
-                        var newEntry = new ScheduleEntry();
-                        newEntry.StartTime = scheduleTime.ToString();
-                        newEntry.FinishTime = newScheduleTime.ToString();
-                        newEntry.TaskId = task.Id;
-                        newEntry.Name = task.Name;
 
-                        newSchedule.Add(newEntry);
+                        newSchedule.Add(CreateNewScheduleEntry(
+                            scheduleTime,
+                            newScheduleTime,
+                            task.Id,
+                            task.Name
+                        ));
+
                         minsRemaining = minsRemaining - lengthInMins;
                         scheduleTime = newScheduleTime;
                     }                    
@@ -80,7 +104,7 @@ namespace AutoScheduler.Services
         {
             foreach(var task in GetSchedule())
             {
-                if (task.TaskId == null)
+                if (task.TaskId == null || task.TaskId == "break")
                 {
                     return false;
                 }
@@ -132,6 +156,36 @@ namespace AutoScheduler.Services
                     schedule
                 );
             }
+        }
+
+        public ScheduleEntry CreateNewScheduleEntry(TimeOnly scheduleTime, TimeOnly newScheduleTime, string? taskId, string? name)
+        {
+            var newEntry = new ScheduleEntry();
+            newEntry.StartTime = scheduleTime.ToString();
+            newEntry.FinishTime = newScheduleTime.ToString();
+            newEntry.TaskId = taskId;
+            newEntry.Name = name;
+            return newEntry;
+        }
+
+        public List<TimeOnly> CalculateBreaks(double sessionMins, TimeOnly startTime)
+        {
+            var minimumSessionLength = 180;
+            var numOfBreaks = Convert.ToInt16(Math.Floor(sessionMins / minimumSessionLength));
+            var breakInterval = Math.Floor(sessionMins / (numOfBreaks + 1));
+            var breakTimes = new List<TimeOnly>();
+
+            for(var i = 1; i <= numOfBreaks; i++)
+            {
+                if (numOfBreaks > 0)
+                {
+                    var newBreak = startTime.AddMinutes(breakInterval * i);
+                    breakTimes.Add(newBreak);
+                    Console.WriteLine($"new break: {newBreak}");
+                } 
+            }
+
+            return breakTimes;
         }
 
         public int GetTaskLengthInMins(string lengthString)

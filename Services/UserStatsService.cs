@@ -23,6 +23,7 @@ namespace AutoScheduler.Services
                 x.CompletedDateTime != null && 
                 (DateTime.UtcNow.Date - DateTime.Parse(x.CompletedDateTime)).TotalDays  <= prevDays
             );
+            
             return filteredBacklog.Count;
         }
 
@@ -37,12 +38,13 @@ namespace AutoScheduler.Services
                 result.Add(
                     new UserStatistic(
                         $"{priority}", 
-                        Convert.ToDouble(backlog.FindAll(x => x.Priority == priority).Count)
+                        Convert.ToDouble(backlog.FindAll(
+                            x => x.Priority == priority && x.Completed != true
+                        ).Count)
                     )
                 );
             }
 
-            Console.WriteLine(result);
             return result != null ? result : default!;
         }
 
@@ -57,12 +59,13 @@ namespace AutoScheduler.Services
                 result.Add(
                     new UserStatistic(
                         $"{length}", 
-                        Convert.ToDouble(backlog.FindAll(x => x.Length == length).Count)
+                        Convert.ToDouble(backlog.FindAll(x => 
+                            x.Length == length && x.Completed != true
+                        ).Count)
                     )
                 );            
             }
 
-            Console.WriteLine(result);
             return result != null ? result : default!;
         }
     }

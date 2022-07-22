@@ -14,7 +14,7 @@
             <h3 class="col-3">@task.StartTime</h3>
             <p class="col-7">@GetTaskName(task.TaskId)</p>
             <div class="col-2 d-flex justify-content-center">
-                @if(task.TaskId != null)
+                @if(task.TaskId != null && task.TaskId != "break")
                 {
                     <button class="btn btn-primary" @onclick="(e => ScheduleChangeStatus(task.TaskId))">
                         @if(Convert.ToBoolean(BacklogService.GetMatchingBacklogItem(task.TaskId).Completed))
@@ -69,13 +69,25 @@
 
     string GetTaskName(string id)
     {
-        if (id == null)
+        string result;
+
+        switch(id)
         {
-            return "This task was deleted from the backlog";
+            case null:
+                result = "This task was deleted from the backlog";
+            break;
+
+            case "break":
+                result = "Take A Break";
+            break;
+
+            default:
+                var taskName = BacklogService.GetMatchingBacklogItem(id).Name;
+                result = taskName != null ? taskName : "task name not found";
+            break;
         }
 
-        var taskName = BacklogService.GetMatchingBacklogItem(id).Name;
-        return taskName != null ? taskName : "task name not found";
+        return result;
     }
 
     void DeleteSchedule()
@@ -100,7 +112,7 @@
 
     string GetClasses(string id)
     {
-        var taskComplete = id == null ? false : Convert.ToBoolean(BacklogService.GetMatchingBacklogItem(id).Completed);
+        var taskComplete = id == null || id == "break" ? false : Convert.ToBoolean(BacklogService.GetMatchingBacklogItem(id).Completed);
         string classList = "card-body row";
         return taskComplete ? $"{classList} bg-success text-white" : classList;
     }

@@ -1,1 +1,32 @@
-[]
+[
+  {
+    "StartTime": "10:00",
+    "FinishTime": "10:15",
+    "TaskId": "13",
+    "Name": "test 4"
+  },
+  {
+    "StartTime": "10:15",
+    "FinishTime": "11:15",
+    "TaskId": "14",
+    "Name": "test 5"
+  },
+  {
+    "StartTime": "11:15",
+    "FinishTime": "11:30",
+    "TaskId": "11",
+    "Name": "test 2"
+  },
+  {
+    "StartTime": "11:30",
+    "FinishTime": "11:50",
+    "TaskId": "break",
+    "Name": null
+  },
+  {
+    "StartTime": "11:50",
+    "FinishTime": "12:20",
+    "TaskId": "12",
+    "Name": "test 3"
+  }
+]
