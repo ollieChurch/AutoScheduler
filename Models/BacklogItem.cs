@@ -8,6 +8,7 @@ namespace AutoScheduler.Models
         public string? Name { get; set; }
         public string? Length { get; set; }
         public string? Priority { get; set; }
+        public string? Category { get; set; }
         public bool? Completed { get; set; }
         public string? CompletedDateTime { get; set; }
 

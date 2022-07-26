@@ -47,6 +47,20 @@ namespace AutoScheduler.Services
             }
         }
 
+        public IEnumerable<string> GetCategories()
+        {
+            var categories = new List<string>();
+            foreach(var item in GetBacklog())
+            {
+                if (item.Category != null)
+                {
+                    categories.Add(item.Category);
+                }
+            }
+
+            return categories.Distinct();
+        }
+
         public void ChangeCompletedStatus(string backlogId)
         {
             var backlog = GetBacklog();
@@ -76,7 +90,7 @@ namespace AutoScheduler.Services
             }
         }
 
-        public void AddItemToBacklog(string name, string length, string priority)
+        public void AddItemToBacklog(string name, string length, string priority, string category)
         {
             var backlog = GetBacklog().ToList();
             var prevId = backlog.Count == 0 || backlog == null ? "0" : backlog.Last().Id;
@@ -86,9 +100,10 @@ namespace AutoScheduler.Services
                 var newId = (int.Parse(prevId) + 1).ToString();
                 var newItem = new BacklogItem();
                 newItem.Id = newId;
-                newItem.Name = name;
+                newItem.Name = char.ToUpper(name[0]) + name.Substring(1).ToLower();
                 newItem.Length = length;
                 newItem.Priority = priority;
+                newItem.Category = char.ToUpper(category[0]) + category.Substring(1).ToLower();
                 backlog.Add(newItem);
 
                 Console.WriteLine(newItem);

@@ -28,9 +28,9 @@ namespace AutoScheduler.Controllers
 
         [HttpPost]
         [Route("createSchedule")]
-        public ActionResult CreateNewSchedule([FromForm] string startTime, [FromForm] string endTime)
+        public ActionResult CreateNewSchedule([FromForm] string startTime, [FromForm] string endTime, [FromForm] IEnumerable<string> includedCategories)
         {
-            SchedulerService.CreateNewSchedule(startTime, endTime);
+            SchedulerService.CreateNewSchedule(startTime, endTime, includedCategories.ToList());
             return Redirect("/schedule");
         }
 

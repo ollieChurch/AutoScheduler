@@ -4,6 +4,7 @@
     "Name": "Unpack",
     "Length": "medium",
     "Priority": "high",
+    "Category": null,
     "Completed": true,
     "CompletedDateTime": "07/10/2022 13:40:55"
   },
@@ -12,6 +13,7 @@
     "Name": "Hoover",
     "Length": "medium",
     "Priority": "mid",
+    "Category": null,
     "Completed": true,
     "CompletedDateTime": "07/10/2022 15:18:04"
   },
@@ -20,6 +22,7 @@
     "Name": "Check Aqua Sana Opening Hours",
     "Length": "short",
     "Priority": "mid",
+    "Category": null,
     "Completed": true,
     "CompletedDateTime": "07/10/2022 15:20:02"
   },
@@ -28,6 +31,7 @@
     "Name": "Respond to Tom",
     "Length": "medium",
     "Priority": "mid",
+    "Category": null,
     "Completed": true,
     "CompletedDateTime": "07/10/2022 15:55:55"
   },
@@ -36,6 +40,7 @@
     "Name": "Create Long List of Bathroom Companies",
     "Length": "medium",
     "Priority": "low",
+    "Category": null,
     "Completed": true,
     "CompletedDateTime": "07/10/2022 16:50:38"
   },
@@ -44,6 +49,7 @@
     "Name": "Decide on Scope for AutoScheduler v 2.0",
     "Length": "medium",
     "Priority": "low",
+    "Category": null,
     "Completed": true,
     "CompletedDateTime": "07/10/2022 17:55:12"
   },
@@ -52,6 +58,7 @@
     "Name": "Put disney frame back up",
     "Length": "medium",
     "Priority": "mid",
+    "Category": null,
     "Completed": true,
     "CompletedDateTime": "07/10/2022 16:02:53"
   },
@@ -60,6 +67,7 @@
     "Name": "Apply For Passport",
     "Length": "long",
     "Priority": "high",
+    "Category": null,
     "Completed": true,
     "CompletedDateTime": "07/10/2022 14:45:52"
   },
@@ -68,63 +76,44 @@
     "Name": "Fix Dahboard Stats Bug in Auto Scheduler",
     "Length": "medium",
     "Priority": "mid",
+    "Category": null,
     "Completed": true,
     "CompletedDateTime": "07/10/2022 17:44:38"
   },
   {
     "Id": "10",
-    "Name": "test 1",
-    "Length": "very long",
+    "Name": "Washing up",
+    "Length": "medium",
     "Priority": "high",
+    "Category": "Home",
     "Completed": true,
-    "CompletedDateTime": "07/19/2022 22:33:25"
+    "CompletedDateTime": "07/26/2022 19:22:11"
   },
   {
     "Id": "11",
-    "Name": "test 2",
+    "Name": "Change bedding",
     "Length": "short",
-    "Priority": "low",
+    "Priority": "mid",
+    "Category": "Home",
     "Completed": null,
     "CompletedDateTime": null
   },
   {
     "Id": "12",
-    "Name": "test 3",
-    "Length": "medium",
-    "Priority": "low",
-    "Completed": null,
-    "CompletedDateTime": null
+    "Name": "Make and have dinner",
+    "Length": "long",
+    "Priority": "high",
+    "Category": "Home",
+    "Completed": true,
+    "CompletedDateTime": "07/26/2022 19:22:13"
   },
   {
     "Id": "13",
-    "Name": "test 4",
+    "Name": "Book train tickets for august",
     "Length": "short",
     "Priority": "high",
-    "Completed": false,
-    "CompletedDateTime": null
-  },
-  {
-    "Id": "14",
-    "Name": "test 5",
-    "Length": "long",
-    "Priority": "mid",
-    "Completed": false,
-    "CompletedDateTime": null
-  },
-  {
-    "Id": "15",
-    "Name": "test 6",
-    "Length": "long",
-    "Priority": "low",
-    "Completed": null,
-    "CompletedDateTime": null
-  },
-  {
-    "Id": "16",
-    "Name": "test 7",
-    "Length": "very long",
-    "Priority": "mid",
+    "Category": "Home",
     "Completed": true,
-    "CompletedDateTime": "07/19/2022 22:34:07"
+    "CompletedDateTime": "07/26/2022 19:22:15"
   }
 ]

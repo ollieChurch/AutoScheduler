@@ -32,7 +32,7 @@ namespace AutoScheduler.Services
             }
         }
 
-        public List<ScheduleEntry> CreateNewSchedule(string start, string finish)
+        public List<ScheduleEntry> CreateNewSchedule(string start, string finish, List<string> includedCategories)
         {
             var newSchedule = new List<ScheduleEntry>();
             var backlog = BacklogService.GetBacklog().ToList().FindAll(x => x.Completed == false || x.Completed == null);
@@ -68,7 +68,7 @@ namespace AutoScheduler.Services
                     }
 
                     var lengthInMins = GetTaskLengthInMins(task.Length);
-                    if (lengthInMins <= minsRemaining)
+                    if (lengthInMins <= minsRemaining && includedCategories.Any(x => x == task.Category))
                     {
                         var newScheduleTime = scheduleTime.AddMinutes(lengthInMins);
 

@@ -12,12 +12,23 @@
                 <h5 class="modal-title" id="exampleModalLabel">Add Item To The Backlog</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="/api/backlog/addItem" method="post">
+            <form action="/api/backlog/addItem" method="post" autocomplete="off">
                 <div class="modal-body">
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" name="task" placeholder="task name">
                         <label for="task">Task</label>
                     </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control"  type="text" list="categories" name='category' placeholder="category">
+                        <datalist id="categories">
+                            @foreach(var category in BacklogService.GetCategories())
+                            {
+                                <option>@category</option>
+                            }
+                        </datalist>
+                        <label for="category">Category</label> 
+                    </div>
+                 
                     <div class="form-floating mb-3">
                         <select class="form-select" name="priority" aria-label="Choose task priority">
                             <option value="low">Low</option>

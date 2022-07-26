@@ -12,7 +12,10 @@
     <div class="card mb-2">
         <div class=@GetClasses(task.TaskId)>    
             <h3 class="col-3">@task.StartTime</h3>
-            <p class="col-7">@GetTaskName(task.TaskId)</p>
+            <div class="col-7">
+                <h4 class="card-title">@GetTaskName(task.TaskId)</h4>
+                <p class="card-subtitle small"><em>@GetTaskCategory(task.TaskId)</em></p>
+            </div>
             <div class="col-2 d-flex justify-content-center">
                 @if(task.TaskId != null && task.TaskId != "break")
                 {
@@ -90,6 +93,19 @@
         return result;
     }
 
+    string GetTaskCategory(string id)
+    {
+        string result;
+
+        if (id == null || id == "break")
+        {
+            return "";
+        }
+
+        var taskCategory = BacklogService.GetMatchingBacklogItem(id).Category;
+        return taskCategory != null ? $"Category: {taskCategory}" : "";
+    }
+
     void DeleteSchedule()
     {
         SchedulerService.DeleteSchedule();
@@ -100,9 +116,10 @@
         var schedule = SchedulerService.GetSchedule().ToList();
         var startTime = schedule.First().StartTime;
         var finishTime = schedule.Last().FinishTime;
+
         try
         {
-            SchedulerService.CreateNewSchedule(startTime, finishTime);
+            SchedulerService.CreateNewSchedule(startTime, finishTime, BacklogService.GetCategories().ToList());
         }
         catch
         {
@@ -113,7 +130,7 @@
     string GetClasses(string id)
     {
         var taskComplete = id == null || id == "break" ? false : Convert.ToBoolean(BacklogService.GetMatchingBacklogItem(id).Completed);
-        string classList = "card-body row";
+        string classList = "card-body row align-items-center";
         return taskComplete ? $"{classList} bg-success text-white" : classList;
     }
 }
