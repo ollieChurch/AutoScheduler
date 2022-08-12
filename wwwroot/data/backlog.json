@@ -90,15 +90,6 @@
     "CompletedDateTime": "07/26/2022 19:22:11"
   },
   {
-    "Id": "11",
-    "Name": "Change bedding",
-    "Length": "short",
-    "Priority": "mid",
-    "Category": "Home",
-    "Completed": null,
-    "CompletedDateTime": null
-  },
-  {
     "Id": "12",
     "Name": "Make and have dinner",
     "Length": "long",
@@ -115,5 +106,86 @@
     "Category": "Home",
     "Completed": true,
     "CompletedDateTime": "07/26/2022 19:22:15"
+  },
+  {
+    "Id": "14",
+    "Name": "Washing up",
+    "Length": "medium",
+    "Priority": "mid",
+    "Category": "Cleaning",
+    "Completed": true,
+    "CompletedDateTime": "08/03/2022 20:33:13"
+  },
+  {
+    "Id": "15",
+    "Name": "Hang laundry",
+    "Length": "short",
+    "Priority": "high",
+    "Category": "Home",
+    "Completed": true,
+    "CompletedDateTime": "08/03/2022 19:08:24"
+  },
+  {
+    "Id": "16",
+    "Name": "Pay plumber",
+    "Length": "short",
+    "Priority": "high",
+    "Category": "Online",
+    "Completed": true,
+    "CompletedDateTime": "08/03/2022 19:21:27"
+  },
+  {
+    "Id": "19",
+    "Name": "Pack bag for work",
+    "Length": "short",
+    "Priority": "low",
+    "Category": "Home",
+    "Completed": true,
+    "CompletedDateTime": "08/03/2022 20:33:15"
+  },
+  {
+    "Id": "20",
+    "Name": "Find new audio book",
+    "Length": "medium",
+    "Priority": "low",
+    "Category": "Online",
+    "Completed": true,
+    "CompletedDateTime": "08/05/2022 19:51:44"
+  },
+  {
+    "Id": "21",
+    "Name": "Have dinner",
+    "Length": "long",
+    "Priority": "mid",
+    "Category": "Home",
+    "Completed": true,
+    "CompletedDateTime": "08/03/2022 21:04:47"
+  },
+  {
+    "Id": "22",
+    "Name": "Sort out 1tap subscription",
+    "Length": "medium",
+    "Priority": "high",
+    "Category": "Online",
+    "Completed": true,
+    "CompletedDateTime": "08/03/2022 20:51:13"
+  },
+  {
+    "Id": "23",
+    "Name": "Go through route 66 itinerary",
+    "Length": "medium",
+    "Priority": "low",
+    "Category": "Online",
+    "Completed": null,
+    "CompletedDateTime": null
+  },
+  {
+    "Id": "24",
+    "Name": "Rebook alexander hotel",
+    "Length": "short",
+    "Priority": "high",
+    "Category": "Online",
+    "Completed": null,
+    "CompletedDateTime": null
   }
 ]

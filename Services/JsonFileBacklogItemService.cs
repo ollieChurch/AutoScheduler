@@ -52,7 +52,7 @@ namespace AutoScheduler.Services
             var categories = new List<string>();
             foreach(var item in GetBacklog())
             {
-                if (item.Category != null)
+                if (item.Category != null && item.Completed != true)
                 {
                     categories.Add(item.Category);
                 }

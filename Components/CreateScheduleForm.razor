@@ -8,37 +8,40 @@
         <div class="card-body">
             <p>Enter the start and finish time of your productive session below and let the Auto Scheduler work it's magic.</p>
             <form action="/api/scheduler/createSchedule" method="post">
-            
-            <fieldset class="mb-4">
-                @if(BacklogService.GetCategories().Count() > 0)
-                {
-                    <legend>Select which categories to include</legend>
-                }
-                @foreach(var category in BacklogService.GetCategories())
-                {
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="@category" value="@category" name="includedCategories" checked>
-                        <label class="form-check-label" for="@category">@category</label>
-                    </div>
-                }
-            </fieldset>
-            <div class="d-flex justify-content-center align-items-end">
-                <div class="mb-2 mx-2">
-                    <label for="startTime">Start at: </label>
-                    <input class="form-control" type="time" name="startTime" style="width: min-content;"/>
-                </div>
-                <div class="mb-2 mx-2">
-                    <label for="endTime">End around: </label>
-                    <input class="form-control" type="time" name="endTime" style="width: min-content;"/>
-                </div>
                 
-                <div class="mb-2 mx-2">
-                    <button type="submit" class="btn btn-primary">Schedule!</button>
-                </div>
-            </div>
-            </form>
+                <legend>Choose your timings</legend>
+                <div class="d-flex justify-content-center align-items-end mb-4 gap-4">
+                    <div>
+                        <label for="startTime">Start at: </label>
+                        <input class="form-control" type="time" name="startTime" style="width: min-content;"/>
+                    </div>
 
-            
+                    <p> - </p>
+
+                    <div>
+                        <label for="endTime">End around: </label>
+                        <input class="form-control" type="time" name="endTime" style="width: min-content;"/>
+                    </div>
+                </div>
+
+                <fieldset class="mb-4">
+                    @if(BacklogService.GetCategories().Count() > 0)
+                    {
+                        <legend>Select which categories to include</legend>
+                    }
+                    @foreach(var category in BacklogService.GetCategories())
+                    {
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="@category" value="@category" name="includedCategories" checked>
+                            <label class="form-check-label" for="@category">@category</label>
+                        </div>
+                    }
+                </fieldset>
+
+                <div class="d-flex justify-content-center align-items-center">                    
+                    <button type="submit" class="btn btn-primary py-2 px-5">Schedule!</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

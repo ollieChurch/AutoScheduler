@@ -131,6 +131,6 @@
     {
         var taskComplete = id == null || id == "break" ? false : Convert.ToBoolean(BacklogService.GetMatchingBacklogItem(id).Completed);
         string classList = "card-body row align-items-center";
-        return taskComplete ? $"{classList} bg-success text-white" : classList;
+        return taskComplete ? $"{classList} bg-success bg-gradient text-white" : classList;
     }
 }
