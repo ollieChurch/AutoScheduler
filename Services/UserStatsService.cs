@@ -1,4 +1,6 @@
 using AutoScheduler.Models;
+using System;
+using System.Globalization;
 
 namespace AutoScheduler.Services
 {
@@ -20,8 +22,8 @@ namespace AutoScheduler.Services
         {
             var backlog = BacklogService.GetBacklog().ToList();
             var filteredBacklog = backlog.FindAll(x =>
-                x.CompletedDateTime != null && 
-                (DateTime.UtcNow.Date - DateTime.Parse(x.CompletedDateTime)).TotalDays  <= prevDays
+                x.CompletedDateTime != null &&
+                    (DateTime.UtcNow.Date - DateTime.Parse(x.CompletedDateTime)).TotalDays <= prevDays
             );
             
             return filteredBacklog.Count;

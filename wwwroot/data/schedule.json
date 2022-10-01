@@ -1,1 +1,38 @@
-[]
+[
+  {
+    "StartTime": "09:00",
+    "FinishTime": "09:15",
+    "TaskId": "1",
+    "Name": "Empty bins"
+  },
+  {
+    "StartTime": "09:15",
+    "FinishTime": "09:45",
+    "TaskId": "2",
+    "Name": "Washing up"
+  },
+  {
+    "StartTime": "09:45",
+    "FinishTime": "10:45",
+    "TaskId": "3",
+    "Name": "Run \u0026 shower"
+  },
+  {
+    "StartTime": "10:45",
+    "FinishTime": "12:45",
+    "TaskId": "4",
+    "Name": "Work on indiana website"
+  },
+  {
+    "StartTime": "12:45",
+    "FinishTime": "13:05",
+    "TaskId": "break",
+    "Name": null
+  },
+  {
+    "StartTime": "13:05",
+    "FinishTime": "15:05",
+    "TaskId": "5",
+    "Name": "Continue .net api course"
+  }
+]
